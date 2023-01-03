@@ -1,35 +1,29 @@
+import { useState } from 'react';
 import './styles.css';
-import { useState } from "react";
-import InputContext from '../../context/inputContext';
 
-interface IProps {
-    zipCode: number,
-    setZipCode: (value: number) => void
+type Props = {
+    name: string,
+    cep: (value: string) => {},
+    isReadonly: boolean,
+    placeholder: string,
+    value: any
 };
 
-export const Input: React.FC = () => {
-    const [zipCode, setZipCode] = useState(0);
-
-    // function handleZipCode(value: number) {
-    //     setZipCode(value);
-    // }
-    
+export const Input = ({ cep, name, isReadonly, placeholder, value }: Props) => {
     return (
-        <InputContext.Provider value={{ zipCode, setZipCode }}>
-
-            <div className="d-flex w-100">
-                <label htmlFor="cep">cep</label>
-                <input
-                    className="w-100"
-                    type="text"
-                    name="cep"
-                    id="cep"
-                    placeholder="xxxxx-xxx"
-                    onChange={(e) => {
-                        setZipCode(e.target.value)
-                    }}
-                />
-            </div>
-        </InputContext.Provider>
+        <div className="d-flex w-100">
+            <label htmlFor="cep">{name}</label>
+            <input
+                className="w-100"
+                type="text"
+                name={name}
+                placeholder={placeholder}
+                onChange={(e) => {
+                    cep(e.target.value)
+                }}
+                readOnly={isReadonly ? true : false}
+                value={value}
+            />
+        </div>
     );
 };
