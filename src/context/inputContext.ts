@@ -1,5 +1,9 @@
-import { createContext } from "react"
+import { createContext } from "react";
 
-const InputContext = createContext({});
+interface IProps {
+    zipCode: string,
+    setZipCode: React.Dispatch<React.SetStateAction<string>>
+};
+const InputContext = createContext({} as IProps);
 
 export default InputContext;
